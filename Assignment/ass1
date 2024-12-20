@@ -6,6 +6,20 @@ users to perform operations such as viewing inventory, searching for items by na
 This assignment is designed to mirror real-world inventory management systems used in industries like retail, manufacturing, and logistics,
 providing hands-on experience with object-oriented design, file handling, and user interaction in C++.
 
+
+Input:
+
+1.Add item details like item ID, name, category, quantity, and reorder level.
+2.Update stock levels for existing items.
+3.Search for items by name or category.
+
+
+Output:
+1.Display the current inventory with all item details.
+2.Alert the user when an item's stock is below its reorder level.
+3.Export inventory data to a file for record-keeping.
+
+
 */
 #include <iostream>
 #include <vector>
