@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+// Definition for a binary tree node
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+// Helper function to check if two trees are mirror images of each other
+bool isSymmetricHelper(TreeNode* left, TreeNode* right) {
+    // Base case: both nodes are null, tree is symmetric so far
+    if (left == nullptr && right == nullptr) {
+        return true;
+    }
+    // If one of the nodes is null or values do not match, it's not symmetric
+    if (left == nullptr || right == nullptr || left->val != right->val) {
+        return false;
+    }
+    
+    // Recursively check the left subtree with right subtree, and right subtree with left subtree
+    return isSymmetricHelper(left->left, right->right) && isSymmetricHelper(left->right, right->left);
+}
+
+// Function to check if a tree is symmetric
+bool isSymmetric(TreeNode* root) {
+    if (root == nullptr) {
+        return true;  // An empty tree is symmetric
+    }
+    // Call the helper function with the left and right children of the root
+    return isSymmetricHelper(root->left, root->right);
+}
+
+int main() {
+    // Creating a symmetric tree example:
+    //        1
+    //       / \
+    //      2   2
+    //     / \ / \
+    //    3  4 4  3
+    TreeNode* root = new TreeNode(1);
+    root->left = new TreeNode(2);
+    root->right = new TreeNode(2);
+    root->left->left = new TreeNode(3);
+    root->left->right = new TreeNode(4);
+    root->right->left = new TreeNode(4);
+    root->right->right = new TreeNode(3);
+    
+    if (isSymmetric(root)) {
+        cout << "The tree is symmetric." << endl;
+    } else {
+        cout << "The tree is not symmetric." << endl;
+    }
+
+    return 0;
+}
+
+Input:
+      1
+     / \
+    2   2
+   / \ / \
+  3  4 4  3
+
+Output:
+The tree is symmetric.

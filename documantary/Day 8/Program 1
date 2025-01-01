@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int findCenterOfStarGraph(vector<vector<int>>& edges) {
+    unordered_map<int, int> nodeCount;
+    
+    // Traverse all edges and count occurrences of each node
+    for (const auto& edge : edges) {
+        nodeCount[edge[0]]++;
+        nodeCount[edge[1]]++;
+    }
+    
+    // The center node will be the one with the highest occurrence
+    for (const auto& entry : nodeCount) {
+        if (entry.second == edges.size()) {
+            return entry.first;
+        }
+    }
+    
+    return -1; // In case of an error, though it should not happen for a valid star graph
+}
+
+int main() {
+    // Example: edges of a star graph
+    vector<vector<int>> edges = {{1, 2}, {2, 3}, {4, 2}, {5, 2}};
+    
+    int centerNode = findCenterOfStarGraph(edges);
+    cout << "The center of the star graph is: " << centerNode << endl;
+
+    return 0;
+}
+
+Output:
+The center of the star graph is: 2

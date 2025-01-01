@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int findJudge(int N, vector<vector<int>>& trust) {
+    // Arrays to store in-degrees and out-degrees of each person
+    vector<int> inDegree(N+1, 0);  // In-degree counts (1-based index)
+    vector<int> outDegree(N+1, 0); // Out-degree counts (1-based index)
+
+    // Process the trust list
+    for (auto& t : trust) {
+        int a = t[0], b = t[1];
+        outDegree[a]++; // a trusts b
+        inDegree[b]++;  // b is trusted by a
+    }
+
+    // The judge must have in-degree of N-1 and out-degree of 0
+    for (int i = 1; i <= N; ++i) {
+        if (inDegree[i] == N - 1 && outDegree[i] == 0) {
+            return i; // Person i is the judge
+        }
+    }
+
+    return -1; // No judge exists
+}
+
+int main() {
+    int N = 3;
+    vector<vector<int>> trust = {{1, 3}, {2, 3}};
+    
+    int judge = findJudge(N, trust);
+    if (judge == -1) {
+        cout << "No judge found!" << endl;
+    } else {
+        cout << "The town judge is: " << judge << endl;
+    }
+
+    return 0;
+}
+
+Input:
+N = 3
+trust = {{1, 3}, {2, 3}}
+
+Output:
+The town judge is: 3
